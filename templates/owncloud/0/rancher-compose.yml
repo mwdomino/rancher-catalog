@@ -7,4 +7,13 @@
   questions:
 
 owncloud:
-  scale: 2
+  scale: 1
+  health_check:
+    port: 80
+    request_line: GET / HTTP/1.0
+    interval: 2000
+    initializing_timeout: 60000
+    reinitializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+
