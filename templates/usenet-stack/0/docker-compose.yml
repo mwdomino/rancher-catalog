@@ -1,5 +1,3 @@
-version: '2'
-services:
   hydra:
     image: linuxserver/hydra2
     environment:
