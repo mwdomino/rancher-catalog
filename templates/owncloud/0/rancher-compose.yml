@@ -7,3 +7,4 @@
   questions:
 
 owncloud:
+  scale: 3
