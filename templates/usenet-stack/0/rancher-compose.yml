@@ -1,0 +1,28 @@
+version: '2'
+services:
+  hydra:
+    scale: 1
+    start_on_create: true
+  radarr:
+    scale: 1
+    start_on_create: true
+  sonarr:
+    scale: 1
+    start_on_create: true
+  stats:
+    scale: 1
+    start_on_create: true
+  sabnzbd:
+    scale: 1
+    start_on_create: true
+    #  health_check:
+    # port: 8080
+    # request_line: GET / HTTP/1.0
+    # interval: 2000
+    # initializing_timeout: 60000
+    # reinitializing_timeout: 60000
+    # unhealthy_threshold: 3
+    # strategy: recreate
+  plex:
+    scale: 1
+    start_on_create: true

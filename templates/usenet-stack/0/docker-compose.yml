@@ -1,0 +1,64 @@
+version: '2'
+services:
+  hydra:
+    image: linuxserver/hydra2
+    environment:
+      GUID: '1000'
+      PUID: '1000'
+      TZ: America/New_York
+    volumes:
+    - /var/nfs/rancher-data/hydra:/config
+    - /var/nfs/media/unsorted/hydra:/downloads
+    ports:
+    - 5076:5076/tcp
+  radarr:
+    image: linuxserver/radarr
+    volumes:
+    - /var/nfs/media/movies:/movies
+    - /var/nfs/rancher-data/radarr:/config
+    - /var/nfs/media:/downloads
+    - /etc/localtime:/etc/localtime:ro
+    ports:
+    - 7878:7878/tcp
+  sonarr:
+    image: linuxserver/sonarr
+    volumes:
+    - /var/nfs/media/tv:/tv
+    - /var/nfs/rancher-data/sonarr:/config
+    - /var/nfs/media:/downloads
+    - /etc/localtime:/etc/localtime:ro
+    ports:
+    - 8989:8989/tcp
+  stats:
+    image: tautulli/tautulli
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: America/New_York
+    volumes:
+    - /var/nfs/rancher-data/tautulli:/config
+    - /var/nfs/rancher-data/plex/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
+    ports:
+    - 8181:8181/tcp
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    volumes:
+    - /var/nfs/rancher-data/sabnzbd:/config
+    - /var/nfs/media:/downloads
+    - /incomplete-downloads:/incomplete-downloads
+    - /etc/localtime:/etc/localtime:ro
+    ports:
+    - 8080:8080/tcp
+    - 9090:9090/tcp
+  plex:
+    image: linuxserver/plex
+    volumes:
+    - /var/nfs/media/tv:/mnt/media/tv
+    - /var/nfs/media/movies:/mnt/media/movies
+    - /var/nfs/rancher-data/plex:/config
+    - /etc/localtime:/etc/localtime:ro
+    - /var/nfs/media/overwatch/matt/Overwatch:/matt-vod
+    - /var/nfs/media/overwatch/gemma/Overwatch:/gemma-vod
+    - /var/nfs/media/music:/music
+    ports:
+    - 32400:32400/tcp
